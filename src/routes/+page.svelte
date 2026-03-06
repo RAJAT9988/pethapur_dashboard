@@ -7,12 +7,8 @@
 
 	function handleSubmit(e: Event) {
 		e.preventDefault();
-		loading = true;
-		// Add your login logic here
-		setTimeout(() => {
-			loading = false;
-			window.location.href = '/dashboard';
-		}, 1000);
+		// No auth for now: always go to dashboard.
+		window.location.href = '/dashboard';
 	}
 </script>
 
@@ -38,7 +34,6 @@
 					id="email"
 					bind:value={email}
 					placeholder="Enter your email"
-					required
 				/>
 			</div>
 
@@ -49,7 +44,6 @@
 					id="password"
 					bind:value={password}
 					placeholder="Enter your password"
-					required
 				/>
 			</div>
 
@@ -61,12 +55,8 @@
 				<a href="/forgot-password" class="forgot-password">Forgot password?</a>
 			</div>
 
-			<button type="submit" class="submit-btn" disabled={loading}>
-				{#if loading}
-					Signing in...
-				{:else}
-					Sign In
-				{/if}
+			<button type="submit" class="submit-btn">
+				Sign In
 			</button>
 		</form>
 
