@@ -71,7 +71,24 @@ npm run build
 npm run start
 ```
 
-Runs Express on port **3000**: serves the built app and the HLS stream. Open http://localhost:3000.
+This is intended for **local/self-hosting** only (not Vercel). `server.js` runs Express on port **3000** and starts ffmpeg to generate an HLS stream.
+
+If you want to self-host with this single-server setup, you may want to switch the adapter back to `@sveltejs/adapter-static` so `server.js` can serve the generated static build.
+
+## Deploying on Vercel
+
+This project is configured to deploy on **Vercel** using the SvelteKit Vercel adapter.
+
+- **Build command**: `npm run build`
+- **Dev command** (local): `npm run dev`
+
+### Important note about camera streaming on Vercel
+
+The RTSP→HLS stream server in `server.js` uses **ffmpeg** + local filesystem writes. That **won’t run on Vercel serverless functions**.
+
+For Vercel deployments:
+- Keep the app UI and the digital twin.
+- For live streams, use an external streaming service (e.g. MediaMTX / HLS proxy) and set URLs in `static/digital-twin.html` (`CAMERA_STREAM_URLS`).
 
 ### Optional: MediaMTX (WebRTC)
 
