@@ -1,0 +1,25 @@
+# MediaMTX config for WebRTC (optional - use when you want WHEP instead of HLS)
+# Run: ./mediamtx mediamtx.yml
+# Then in digital-twin use: http://localhost:8889/manager_office/whep
+
+logLevel: info
+logDestinations: [stdout]
+
+rtsp: yes
+protocols: [udp, multicast, tcp]
+rtspAddress: :8554
+
+hls: yes
+hlsAddress: :8888
+hlsAllowOrigin: '*'
+
+webrtc: yes
+webrtcAddress: :8889
+webrtcAllowOrigin: '*'
+
+paths:
+  manager_office:
+    source: rtsp://admin:admin123456@192.168.1.10:8554/profile0
+    sourceOnDemand: no
+
+  all_others:
